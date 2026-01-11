@@ -1,3 +1,4 @@
+"use client"
 interface Props {
   enabled: boolean
   onToggle: () => void

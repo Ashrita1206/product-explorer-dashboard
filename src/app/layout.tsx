@@ -7,8 +7,9 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <head>
+    <html lang="en" className="light">
+
+      {/* <head>
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -21,7 +22,7 @@ export default function RootLayout({
 `,
           }}
         />
-      </head>
+      </head> */}
 
       <body
         className="
