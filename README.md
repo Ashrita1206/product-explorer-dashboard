@@ -41,7 +41,6 @@ Project Structure
 src/
 ├── app/
 ├── components/
-├── context/
 ├── hooks/
 ├── lib/
 └── types/
