@@ -10,7 +10,13 @@ export default async function HomePage() {
         Product Explorer
       </h1>
 
-      <ProductExplorer products={products} />
+      {products.length === 0 ? (
+        <p className="text-gray-500">
+          Unable to load products at the moment.
+        </p>
+      ) : (
+        <ProductExplorer products={products} />
+      )}
     </main>
   )
 }

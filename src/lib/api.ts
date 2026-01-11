@@ -4,39 +4,44 @@ const BASE_URL = "https://fakestoreapi.com"
 
 /** Get ALL products */
 export async function fetchProducts(): Promise<Product[]> {
-  const res = await fetch(`${BASE_URL}/products`, {
-    cache: "no-store"
-  })
+  try {
+    const res = await fetch("https://fakestoreapi.com/products", {
+      cache: "no-store", 
+    })
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch products")
+    if (!res.ok) {
+      console.error("API response not OK:", res.status)
+      return []
+    }
+
+    const data = await res.json()
+
+    if (!Array.isArray(data)) {
+      console.error("Invalid API response:", data)
+      return []
+    }
+
+    return data
+  } catch (error) {
+    console.error("Fetch products failed:", error)
+    return [] 
   }
-
-  return res.json()
 }
+
 
 /** Get SINGLE product */
-export async function fetchProduct(id: string): Promise<Product> {
-  if (!id) {
-    throw new Error("Product ID is missing")
+export async function fetchProduct(id: string) {
+  try {
+    const res = await fetch(`https://fakestoreapi.com/products/${id}`, {
+      cache: "no-store",
+    })
+
+    if (!res.ok) return null
+
+    return await res.json()
+  } catch {
+    return null
   }
-
-  const res = await fetch(
-    `https://fakestoreapi.com/products/${id}`,
-    { cache: "no-store" }
-  )
-
-  const text = await res.text()
-
-  if (!res.ok) {
-    console.error("API error response:", text)
-    throw new Error(`Failed to fetch product: ${res.status}`)
-  }
-
-  if (!text) {
-    throw new Error("Empty response from API")
-  }
-
-  return JSON.parse(text) as Product
 }
+
 

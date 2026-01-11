@@ -12,6 +12,7 @@ export default async function ProductDetail({ params }: PageProps) {
     const { id } = await params
 
     const product = await fetchProduct(id)
+    if (!product) notFound()
 
     return (
       <div className="p-6 max-w-3xl mx-auto">
